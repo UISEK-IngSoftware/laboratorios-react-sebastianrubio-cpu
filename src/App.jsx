@@ -1,5 +1,5 @@
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import { pokemons } from './data/pokemons'; // Importación de tus datos locales
+import { pokemons } from './data/pokemons'; // Importa correctamente el array desde su ubicación
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         {pokemons.map((pokemon) => (
           <Grid item key={pokemon.id} xs={12} sm={6} md={4}>
             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', boxShadow: 3 }}>
-              {/* Contenedor gris de fondo para resaltar el sprite */}
+              
               <Box sx={{ bgcolor: '#f5f5f5', p: 3, display: 'flex', justifyContent: 'center' }}>
                 <CardMedia
                   component="img"
@@ -37,7 +37,6 @@ function App() {
                   {pokemon.name}
                 </Typography>
                 
-                {/* Badge dinámico basado en el tipo de Pokémon */}
                 <Typography 
                   variant="body2" 
                   sx={{ 
@@ -65,5 +64,3 @@ function App() {
 }
 
 export default App;
-
-export default App
