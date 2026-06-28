@@ -8,12 +8,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 function App() {
     return (
         <BrowserRouter>
-            <Header />
-            <Container>
-                <Routes>
-                    <Route path="/" element={<PokemonList />} />
-                    <Route path="/add" element={<PokemonForm />} />
-                </Routes>
+            <Container maxWidth="md">
+                {/* Chasis exterior rojo de la Pokédex */}
+                <div className="pokedex-frame">
+                    <Header />
+                    
+                    {/* Pantalla interna LCD del dispositivo */}
+                    <div className="pokedex-screen">
+                        <Routes>
+                            <Route path="/" element={<PokemonList />} />
+                            <Route path="/add" element={<PokemonForm />} />
+                        </Routes>
+                    </div>
+                </div>
             </Container>
         </BrowserRouter>
     );

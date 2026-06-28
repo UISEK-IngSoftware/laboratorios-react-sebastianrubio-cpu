@@ -1,0 +1,53 @@
+/* src/components/PokemonForm.css */
+
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.file-input-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Modificación de la caja contenedora del archivo */
+.pokedex-file-input {
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border: 2px dashed #444444;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.pokedex-file-input:hover {
+  border-color: #00cbff;
+  background-color: #222222;
+}
+
+/* Pseudo-elemento específico para el botón interno del explorador de archivos */
+.pokedex-file-input::-webkit-file-upload-button {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-right: 15px;
+  transition: background-color 0.1s;
+}
+
+.pokedex-file-input::-webkit-file-upload-button:hover {
+  background-color: #444444;
+  border-color: #00cbff;
+}
