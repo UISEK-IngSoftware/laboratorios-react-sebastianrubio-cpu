@@ -12,8 +12,6 @@ function App() {
             <Container maxWidth="md">
                 {/* Chasis exterior rojo de la Pokédex */}
                 <div className="pokedex-frame">
-                    
-                    {/* El Header DEBE estar dentro de BrowserRouter porque usa el componente Link */}
                     <Header />
                     
                     {/* Pantalla interna LCD del dispositivo */}
@@ -21,6 +19,8 @@ function App() {
                         <Routes>
                             <Route path="/" element={<PokemonList />} />
                             <Route path="/add" element={<PokemonForm />} />
+                            {/* NUEVA RUTA: Mapea el id del espécimen a modificar */}
+                            <Route path="/edit/:id" element={<PokemonForm />} />
                         </Routes>
                     </div>
                 </div>

@@ -10,10 +10,26 @@ export default function PokemonList() {
     const [isOpen, setIsOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
 
+    // Consulta de red pura aislada de la animación de hardware inicial
+    const refreshDataFromServer = () => {
+        fetchPokemons()
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setPokemons(data);
+                } else if (data && Array.isArray(data.results)) {
+                    setPokemons(data.results);
+                } else {
+                    setPokemons([]);
+                }
+            })
+            .catch((error) => {
+                console.error("Fallo crítico al refrescar:", error);
+            });
+    };
+
     const handleOpenPokedex = () => {
         setIsAnimating(true);
 
-        // Retraso controlado para procesar la animación CRT de encendido
         setTimeout(() => {
             fetchPokemons()
                 .then((data) => {
@@ -32,15 +48,13 @@ export default function PokemonList() {
                     console.error(error);
                     setIsAnimating(false);
                 });
-        }, 1500); // 1.5 segundos de animación de arranque
+        }, 1500); 
     };
 
     if (!isOpen) {
         return (
             <Box className="pokedex-screen-wrapper">
-                <Box 
-                    className={`pokedex-large-standby ${isAnimating ? "system-booting" : ""}`}
-                >
+                <Box className={`pokedex-large-standby ${isAnimating ? "system-booting" : ""}`}>
                     {isAnimating ? (
                         <Box className="terminal-loader-content">
                             <div className="crt-scanline"></div>
@@ -58,7 +72,7 @@ export default function PokemonList() {
                             onClick={handleOpenPokedex}
                             className="pokedex-trigger-btn"
                         >
-                            Abir Pokédex
+                            Abrir Pokédex
                         </Button>
                     )}
                 </Box>
@@ -69,8 +83,9 @@ export default function PokemonList() {
     return (
         <Grid container spacing={2} className="elastic-cards-entrance">
             {Array.isArray(pokemons) && pokemons.map((pokemonItem) => (
-                <Grid key={pokemonItem.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                    <PokemonCard pokemon={pokemonItem} />
+                <Grid key={pokemonItem.id} item xs={12} sm={6} md={4}>
+                    {/* Se añade el callback que recarga el listado tras eliminar */}
+                    <PokemonCard pokemon={pokemonItem} onDeleteSuccess={refreshDataFromServer} />
                 </Grid>
             ))}
         </Grid>

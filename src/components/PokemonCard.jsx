@@ -1,11 +1,13 @@
+// src/components/PokemonCard.jsx
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { deletePokemon } from '../services/pokemonService';
 
-export default function PokemonCard({ pokemon }) {
- 
+export default function PokemonCard({ pokemon, onDeleteSuccess }) {
+  const navigate = useNavigate();
   const imageUrl = pokemon.image || pokemon.picture || 'https://via.placeholder.com/150';
 
-  
   const getTypeColor = (type) => {
     const colors = {
       fire: '#ff4422',
@@ -16,6 +18,19 @@ export default function PokemonCard({ pokemon }) {
       normal: '#aaaa99'
     };
     return colors[type?.toLowerCase()] || '#666666';
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm(`¿Está seguro de eliminar a ${pokemon.name} de la base de datos de forma permanente?`)) {
+      try {
+        await deletePokemon(pokemon.id);
+        alert("Registro eliminado exitosamente.");
+        if (onDeleteSuccess) onDeleteSuccess(); // Dispara la recarga de datos en la lista
+      } catch (error) {
+        console.error("Error al eliminar:", error);
+        alert("No se pudo eliminar el registro. Verifique la conexión con el servidor.");
+      }
+    }
   };
 
   return (
@@ -32,7 +47,6 @@ export default function PokemonCard({ pokemon }) {
         }
       }}
     >
-      {/* Contenedor de la imagen simulando un visor secundario */}
       <Box sx={{ p: 2, backgroundColor: '#58ab93', margin: '10px', borderRadius: '6px', border: '2px solid #3b7565' }}>
         <CardMedia
           component="img"
@@ -43,7 +57,7 @@ export default function PokemonCard({ pokemon }) {
         />
       </Box>
 
-      <CardContent sx={{ pt: 0 }}>
+      <CardContent sx={{ pt: 0, pb: '10px !important' }}>
         <Typography 
           gutterBottom 
           variant="h6" 
@@ -58,7 +72,6 @@ export default function PokemonCard({ pokemon }) {
           N° {pokemon.id || '??'} - {pokemon.name}
         </Typography>
 
-        {/* Badge de tipo de elemento */}
         <Box 
           sx={{ 
             display: 'inline-block', 
@@ -71,10 +84,44 @@ export default function PokemonCard({ pokemon }) {
             fontWeight: 'bold',
             fontFamily: 'monospace',
             textTransform: 'uppercase',
-            letterSpacing: '1px'
+            letterSpacing: '1px',
+            mb: 2
           }}
         >
           {pokemon.type || 'Desconocido'}
+        </Box>
+
+        {/* Panel de control interno de la tarjeta (Modificar / Eliminar) */}
+        <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
+          <Button 
+            variant="outlined" 
+            size="small"
+            onClick={() => navigate(`/edit/${pokemon.id}`)}
+            sx={{ 
+              flex: 1, 
+              color: '#00cbff', 
+              borderColor: '#00cbff',
+              fontFamily: 'monospace',
+              fontWeight: 'bold',
+              '&:hover': { borderColor: '#ffffff', color: '#ffffff' }
+            }}
+          >
+            Editar
+          </Button>
+          <Button 
+            variant="outlined" 
+            size="small"
+            color="error"
+            onClick={handleDelete}
+            sx={{ 
+              flex: 1, 
+              fontFamily: 'monospace',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#ff4422', color: '#ffffff' }
+            }}
+          >
+            Borrar
+          </Button>
         </Box>
       </CardContent>
     </Card>
