@@ -1,9 +1,10 @@
+// src/App.jsx
 import { Container } from '@mui/material';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import PokemonList from './components/PokemonList';
 import PokemonForm from './components/PokemonForm';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
 
 function App() {
     return (
@@ -11,6 +12,8 @@ function App() {
             <Container maxWidth="md">
                 {/* Chasis exterior rojo de la Pokédex */}
                 <div className="pokedex-frame">
+                    
+                    {/* El Header DEBE estar dentro de BrowserRouter porque usa el componente Link */}
                     <Header />
                     
                     {/* Pantalla interna LCD del dispositivo */}

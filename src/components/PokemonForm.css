@@ -1,19 +1,17 @@
 /* src/components/PokemonForm.css */
 
+/* src/components/PokemonForm.css */
 .file-input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+    background-color: #2a2a2a; /* Fondo gris suave para el control de archivos */
+    border: 2px dashed #444444;
+    padding: 15px;
+    border-radius: 6px;
+    color: #ffffff;
 }
 
 .file-input-label {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85rem;
-  color: #888888;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    font-family: monospace;
+    color: #888888;
 }
 
 /* Modificación de la caja contenedora del archivo */

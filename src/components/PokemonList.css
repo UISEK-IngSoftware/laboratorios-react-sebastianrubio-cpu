@@ -1,0 +1,133 @@
+/* src/components/PokemonList.css */
+
+.pokedex-screen-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Pantalla LCD masiva y centrada */
+.pokedex-large-standby {
+    width: 100%;
+    min-height: 480px; /* Tamaño significativamente mayor solicitado */
+    background-color: #0b0b0b;
+    border: 6px solid #1a1a1a;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease;
+}
+
+/* Botón centralizado de encendido */
+.pokedex-trigger-btn {
+    background-color: #ffcb05 !important;
+    color: #1c2d5a !important;
+    border: 4px solid #3b4cca !important;
+    font-family: 'monospace' !important;
+    font-weight: bold !important;
+    font-size: 1.3rem !important;
+    padding: 16px 40px !important;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6) !important;
+    transition: transform 0.1s ease, background-color 0.2s ease !important;
+}
+
+.pokedex-trigger-btn:hover {
+    background-color: #f1bf04 !important;
+    transform: scale(1.05);
+}
+
+/* Estado de la pantalla durante la animación de arranque */
+.pokedex-large-standby.system-booting {
+    background-color: #041407;
+    border-color: #00ff41;
+    animation: crtFlicker 0.2s ease-in-out infinite alternate;
+}
+
+@keyframes crtFlicker {
+    0% { opacity: 0.9; filter: brightness(0.95); }
+    100% { opacity: 1; filter: brightness(1.2); }
+}
+
+/* Contenido de texto terminal neón */
+.terminal-loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 5;
+}
+
+.neon-text-green {
+    font-family: 'monospace' !important;
+    color: #00ff41;
+    font-weight: bold !important;
+    text-shadow: 0 0 8px #00ff41;
+    letter-spacing: 2px;
+}
+
+.neon-subtext {
+    font-family: 'monospace' !important;
+    color: #00ff41;
+    opacity: 0.8;
+}
+
+/* Línea de barrido de fósforo CRT */
+.crt-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 255, 65, 0.18);
+    animation: scanMove 1.5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanMove {
+    0% { top: -5%; }
+    100% { top: 105%; }
+}
+
+/* Simulación visual de barra de carga */
+.progress-bar-simulation {
+    width: 200px;
+    height: 6px;
+    background-color: #112211;
+    border: 1px solid #00ff41;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar-simulation::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #00ff41;
+    animation: loadSequence 1.5s ease-in-out forwards;
+}
+
+@keyframes loadSequence {
+    0% { left: -100%; }
+    100% { left: 0%; }
+}
+
+/* Animación elástica para la aparición de las cartas */
+.elastic-cards-entrance {
+    animation: elasticDisplay 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes elasticDisplay {
+    0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
