@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 
 export default function PokemonCard({ pokemon }) {
-  const mediaUrl = import.meta.env.VITE_API_MEDIA_URL;
-  const imageUrl = pokemon.picture ? `${mediaUrl}/${pokemon.picture}` : 'https://via.placeholder.com/150';
+ 
+  const imageUrl = pokemon.image || pokemon.picture || 'https://via.placeholder.com/150';
 
-  // Mapeo básico de colores según el tipo para el badge informativo
+  
   const getTypeColor = (type) => {
     const colors = {
       fire: '#ff4422',
@@ -28,7 +28,7 @@ export default function PokemonCard({ pokemon }) {
         transition: 'transform 0.2s, border-color 0.2s',
         '&:hover': {
           transform: 'scale(1.03)',
-          borderColor: '#00cbff' // Efecto de escaneo celeste al pasar el mouse
+          borderColor: '#00cbff' 
         }
       }}
     >
@@ -37,7 +37,7 @@ export default function PokemonCard({ pokemon }) {
         <CardMedia
           component="img"
           height="140"
-          image={imageUrl}
+          image={imageUrl} 
           alt={pokemon.name}
           sx={{ objectFit: 'contain', filter: 'drop-shadow(2px 4px 6px black)' }}
         />
