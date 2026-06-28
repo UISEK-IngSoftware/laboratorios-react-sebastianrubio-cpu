@@ -16,5 +16,6 @@ export const pokemons = [
     name: "Squirtle",
     image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
     type: "water"
-  }
+  },
+  // Agregar más pokemons...
 ];

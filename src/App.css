@@ -1,8 +1,5 @@
-html, body, root {
-  height: 100%;
-  margin: 100%;
-  padding: 0;
-
-
+html, body, #root{
+margin: auto;
+padding: auto;
+height: 100%;
 }
-
