@@ -1,9 +1,30 @@
 /* src/App.css */
 
 /* Configuración del fondo global de la página para evitar fatiga visual */
+
+.pokemon-top-blue-bar {
+  background-color: #1976d2; 
+  width: 100%;
+  height: 70px;              
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.pokemon-logo-inside-bar {
+  height: 70%;               /* Fuerza al logo a ocupar solo una fracción del alto */
+  width: auto;               /* Mantiene la proporción horizontal del SVG */
+  max-width: 100%;
+  object-fit: contain;       /* Evita cualquier distorsión o desborde */
+}
+
 html, body {
-  background-color: #121212; /* Gris oscuro profundo mate (anti-reflejos) */
-  color: #e0e0e0;            /* Texto secundario en gris claro suave, no blanco puro */
+  background-color: #121212; /* Gris oscuro */
+  color: #e0e0e0;           
   margin: 0;
   padding: 0;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -11,7 +32,6 @@ html, body {
   transition: background-color 0.3s ease;
 }
 
-/* En caso de que tengas un contenedor raíz en tu index.html u hoja global */
 #root {
   background-color: #121212;
   min-height: 100vh;
@@ -20,7 +40,7 @@ html, body {
   flex-direction: column;
 }
 
-/* Chasis exterior de la Pokédex (Ajuste de sombras para resaltar sobre el fondo oscuro) */
+/* Chasis */
 .pokedex-frame {
   background-color: #dc3545; /* Rojo Pokédex */
   border: 4px solid #8c1c24;
@@ -28,12 +48,12 @@ html, body {
   padding: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7); /* Sombra intensa para dar volumen */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7); 
 }
 
-/* Pantalla interna LCD (Donde se renderizan la lista y el formulario) */
+/* Pantalla*/
 .pokedex-screen {
-  background-color: #1e1e1e; /* Fondo de pantalla oscuro para consistencia */
+  background-color: #1e1e1e; 
   border: 4px solid #2d2d2d;
   border-radius: 8px;
   padding: 24px;

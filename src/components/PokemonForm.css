@@ -1,8 +1,6 @@
 /* src/components/PokemonForm.css */
-
-/* src/components/PokemonForm.css */
 .file-input-container {
-    background-color: #2a2a2a; /* Fondo gris suave para el control de archivos */
+    background-color: #2a2a2a; 
     border: 2px dashed #444444;
     padding: 15px;
     border-radius: 6px;
@@ -14,7 +12,7 @@
     color: #888888;
 }
 
-/* Modificación de la caja contenedora del archivo */
+
 .pokedex-file-input {
   font-family: 'Courier New', Courier, monospace;
   color: #ffffff;
@@ -31,7 +29,7 @@
   background-color: #222222;
 }
 
-/* Pseudo-elemento específico para el botón interno del explorador de archivos */
+
 .pokedex-file-input::-webkit-file-upload-button {
   background-color: #333333;
   color: #ffffff;

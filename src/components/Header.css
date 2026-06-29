@@ -5,28 +5,12 @@
   flex-direction: column;
 }
 
-/* Fondo azul estricto para el banner del SVG */
-.pokemon-blue-banner {
-  background-color: #1976d2;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
-}
 
-.pokemon-svg-logo {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  max-height: 90px;
-  object-fit: contain;
-}
 
-/* Barra de hardware inferior (rojo Pokédex original) */
+
+
+
+
 .pokedex-hardware-bar {
   background-color: #dc3545;
   padding: 15px 20px;

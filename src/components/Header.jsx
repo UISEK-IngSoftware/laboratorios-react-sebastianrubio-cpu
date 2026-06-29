@@ -8,15 +8,7 @@ import './Header.css';
 export default function Header() {
   return (
     <div className="pokedex-header-container">
-      {/* Banner con fondo azul y SVG solicitado */}
-      <div className="pokemon-blue-banner">
-        <img 
-          src={pokemonBanner} 
-          alt="Pokémon Banner" 
-          className="pokemon-svg-logo" 
-        />
-      </div>
-
+      
       {/* Panel físico clásico de la Pokédex */}
       <div className="pokedex-hardware-bar">
         <div className="led-panel">
