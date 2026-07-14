@@ -2,10 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import pokemonBanner from '../assets/pokemon-23.svg';
+import { useAuth } from '../context/AuthContext';
 import './Header.css';
 
 export default function Header() {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
     <div className="pokedex-header-container">
       
@@ -21,33 +23,53 @@ export default function Header() {
         </div>
 
         <nav className="pokedex-navigation">
-          <Button 
-            component={Link} 
-            to="/" 
-            variant="contained" 
-            sx={{ 
-              backgroundColor: '#232323', 
-              border: '2px solid #555', 
-              marginRight: '10px',
-              fontFamily: 'monospace',
-              fontWeight: 'bold'
-            }}
-          >
-            Ver Pokédex
-          </Button>
-          <Button 
-            component={Link} 
-            to="/add" 
-            variant="contained" 
-            sx={{ 
-              backgroundColor: '#28a745', 
-              border: '2px solid #1e7e34',
-              fontFamily: 'monospace',
-              fontWeight: 'bold'
-            }}
-          >
-            + Subir Datos
-          </Button>
+          {isAuthenticated && (
+            <>
+              <Button 
+                component={Link} 
+                to="/" 
+                variant="contained" 
+                sx={{ 
+                  backgroundColor: '#232323', 
+                  border: '2px solid #555', 
+                  marginRight: '10px',
+                  fontFamily: 'monospace',
+                  fontWeight: 'bold'
+                }}
+              >
+                Ver Pokédex
+              </Button>
+              <Button 
+                component={Link} 
+                to="/add" 
+                variant="contained" 
+                sx={{ 
+                  backgroundColor: '#28a745', 
+                  border: '2px solid #1e7e34',
+                  marginRight: '10px',
+                  fontFamily: 'monospace',
+                  fontWeight: 'bold'
+                }}
+              >
+                + Subir Datos
+              </Button>
+              <Button 
+                onClick={logout}
+                variant="contained" 
+                sx={{ 
+                  backgroundColor: '#d32f2f', 
+                  border: '2px solid #9a0007',
+                  fontFamily: 'monospace',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    backgroundColor: '#9a0007'
+                  }
+                }}
+              >
+                Cerrar Sesión
+              </Button>
+            </>
+          )}
         </nav>
       </div>
     </div>

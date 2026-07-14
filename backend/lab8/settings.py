@@ -40,9 +40,19 @@ INSTALLED_APPS = [
     'pokedex',
     'rest_framework', # Obligatorio para el API
     'api',
-    'corsheaders',  # Añade esto
+    'corsheaders',
+    'oauth2_provider',
     
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework.authentication.SessionAuthentication', # Opcional para pruebas en navegador
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', # Protege toda la API por defecto
+    ),
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  

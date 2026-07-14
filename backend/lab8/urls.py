@@ -5,10 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pokedex.urls')), # Delega todo el tráfico a la aplicación interna
-    path('api/', include ('api.urls')),
+    # Rutas para obtener, refrescar y revocar tokens
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('', include('pokedex.urls')), 
+    path('api/', include('api.urls')),
 ]
 
-# Configuración exclusiva para servir archivos multimedia en entorno local
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
