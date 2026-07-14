@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'pokedex',
     'rest_framework', # Obligatorio para el API
     'api',
+    'corsheaders',  # Añade esto
+    
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'lab8.urls'
@@ -133,3 +137,12 @@ LOGOUT_REDIRECT_URL = 'pokedex:login' # A dónde ir tras cerrar sesión
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Permitir peticiones desde el puerto por defecto de Vite / React
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+# Si necesitas permitir el envío de credenciales (cookies, auth headers)
+CORS_ALLOW_CREDENTIALS = True
