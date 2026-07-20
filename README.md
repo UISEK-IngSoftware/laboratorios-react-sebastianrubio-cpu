@@ -65,7 +65,7 @@ Integrar llamadas a una API REST generada en Django (laboratorios 5-8 en otro re
 
 ### Variables de entorno (.env)
 ```
-VITE_API_BASE_URL=http://localhost:8000
+VITE_API_BASE_URL=http://localhost:8000/api
 VITE_API_MEDIA_URL=${VITE_API_BASE_URL}/media/
 ```
 
