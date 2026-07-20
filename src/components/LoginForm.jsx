@@ -13,7 +13,7 @@ const LoginForm = ({ onLoginSuccess }) => {
         try {
             const params = new URLSearchParams();
             params.append('grant_type', 'password');
-            params.append('client_id', 'he2RuUe9l5q910DyxBMTemXzaoiU9tVxpU4HM4Du');
+            params.append('client_id', '21i5cCFdLVhBdLCQ6F7ZoJXttCQY3fQb6QsKA8f4');
             params.append('username', username);
             params.append('password', password);
 
