@@ -1,51 +1,69 @@
-/* src/components/Header.css */
-.pokedex-header-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.pokedex-hover-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    z-index: 999;
 }
 
+.pokedex-header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff1f1f;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transform: translateY(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
 
-
-
-
-
+.pokedex-hover-zone:hover + .pokedex-header-container,
+.pokedex-header-container:hover {
+    transform: translateY(0);
+}
 
 .pokedex-hardware-bar {
-  background-color: #dc3545;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 4px solid #9c1c26;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    border-bottom: 4px solid #b01212;
 }
 
 .led-panel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .main-blue-led {
-  width: 40px;
-  height: 40px;
-  background-color: #00cdff;
-  border: 3px solid white;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #00cdff;
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #85d7ff 0%, #005db3 70%);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #0088ff;
 }
 
 .small-leds {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 6px;
 }
 
 .led {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 1px solid #333;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #000;
+    border-radius: 50%;
 }
-.led.red { background-color: #ff3b30; }
-.led.yellow { background-color: #ffcc00; }
-.led.green { background-color: #4cd964; }
+
+.red { background-color: #ff3b30; }
+.yellow { background-color: #ffcc00; }
+.green { background-color: #34c759; }
+
+.pokedex-navigation {
+    display: flex;
+    align-items: center;
+}

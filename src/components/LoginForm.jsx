@@ -30,39 +30,46 @@ const LoginForm = ({ onLoginSuccess }) => {
                 onLoginSuccess(response.data);
             }
         } catch (err) {
-            if (err.response && err.response.data) {
-                setError(JSON.stringify(err.response.data));
-            } else {
-                setError('Error de conexión con el servidor');
-            }
+            setError(err.response ? ' Acceso denegado: Credenciales no válidas' : ' Fallo de conexión de red');
         }
     };
 
     return (
-        <div className="login-container">
-            <h2>Pokédex Login</h2>
-            <form onSubmit={handleLogin}>
-                <div className="input-group">
-                    <label>Usuario:</label>
-                    <input 
-                        type="text" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        required 
-                    />
+        <div className="tech-login-wrapper">
+            <div className="tech-login-card">
+                <div className="tech-card-header">
+                    <div className="scanner-line-effect"></div>
+                    <h2>SYSTEM ACCESS</h2>
+                    <p>AUTENTICACIÓN REQUERIDA (OAUTH 2.0)</p>
                 </div>
-                <div className="input-group">
-                    <label>Contraseña:</label>
-                    <input 
-                        type="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                    />
-                </div>
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-            {error && <p className="error-message">{error}</p>}
+                
+                <form onSubmit={handleLogin} className="tech-form">
+                    <div className="tech-input-field">
+                        <input 
+                            type="text" 
+                            placeholder="ID DE USUARIO"
+                            value={username} 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="tech-input-field">
+                        <input 
+                            type="password" 
+                            placeholder="CLAVE DE ENTRADA"
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    
+                    {error && <div className="tech-error-box">{error}</div>}
+                    
+                    <button type="submit" className="tech-submit-btn">
+                         DECOMANCIAR ACCESO
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

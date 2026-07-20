@@ -1,5 +1,3 @@
-/* src/components/PokemonList.css */
-
 .pokedex-screen-wrapper {
     width: 100%;
     display: flex;
@@ -9,7 +7,6 @@
     box-sizing: border-box;
 }
 
-/* Pantalla */
 .pokedex-large-standby {
     width: 100%;
     min-height: 480px; 
@@ -25,7 +22,23 @@
     transition: all 0.3s ease;
 }
 
-/* Botón centralizado de encendido */
+.pokedex-large-standby.screen-active {
+    align-items: flex-start;
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+.pokemon-grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 .pokedex-trigger-btn {
     background-color: #ffcb05 !important;
     color: #1c2d5a !important;
@@ -44,7 +57,6 @@
     transform: scale(1.05);
 }
 
-/* Estado de la pantalla durante la animación de arranque */
 .pokedex-large-standby.system-booting {
     background-color: #041407;
     border-color: #00ff41;
@@ -56,7 +68,6 @@
     100% { opacity: 1; filter: brightness(1.2); }
 }
 
-/* Contenido de texto terminal neón */
 .terminal-loader-content {
     display: flex;
     flex-direction: column;
@@ -79,7 +90,6 @@
     opacity: 0.8;
 }
 
-
 .crt-scanline {
     position: absolute;
     top: 0;
@@ -96,7 +106,6 @@
     100% { top: 105%; }
 }
 
-/* Barra de progreso simulada */
 .progress-bar-simulation {
     width: 200px;
     height: 6px;
@@ -121,7 +130,6 @@
     0% { left: -100%; }
     100% { left: 0%; }
 }
-
 
 .elastic-cards-entrance {
     animation: elasticDisplay 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
