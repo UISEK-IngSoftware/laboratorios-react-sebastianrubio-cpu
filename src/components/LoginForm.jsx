@@ -1,82 +1,70 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-// Se elimina la prop onAuthSuccess, ya que el componente se desmontará durante la redirección.
-const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const LoginForm = ({ onLoginSuccess }) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-  const handleGitHubLogin = () => {
-    setIsLoading(true);
-    
-    // Configuración estricta para el flujo de GitHub
-    const clientId = 'Ov23likwZH3eFzuhDbEn'; // Reemplaza con tu Client ID de GitHub
-    const redirectUri = 'http://localhost:5173/'; // Debe coincidir exactamente con la de la consola de GitHub
-    
-    // scope=user:email es fundamental para asegurar que GitHub comparta el correo del perfil
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
-    
-    // Redirección dura fuera de la aplicación React
-    window.location.href = githubAuthUrl;
-  };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError('');
 
-  return (
-    <div className="login-form-wrapper" style={styles.wrapper}>
-      <div className="login-box" style={styles.box}>
-        <h2 style={styles.heading}>Acceso Restringido</h2>
-        <p style={styles.text}>
-          El sistema requiere verificación de identidad para manipular la base de datos de Pokémons.
-        </p>
+        try {
+            const params = new URLSearchParams();
+            params.append('grant_type', 'password');
+            params.append('client_id', 'he2RuUe9l5q910DyxBMTemXzaoiU9tVxpU4HM4Du');
+            params.append('username', username);
+            params.append('password', password);
 
-        <button 
-          onClick={handleGitHubLogin} 
-          disabled={isLoading} 
-          style={isLoading ? { ...styles.button, opacity: 0.7 } : styles.button}
-        >
-          {isLoading ? 'Redirigiendo a GitHub...' : 'Autenticar con GitHub OAuth 2.0'}
-        </button>
-      </div>
-    </div>
-  );
-};
+            const response = await axios.post('http://localhost:8000/api/oauth/token/', params, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
 
-const styles = {
-  wrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '60vh',
-    backgroundColor: '#f5f5f5',
-  },
-  box: {
-    padding: '40px',
-    backgroundColor: '#ffffff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-    maxWidth: '400px',
-    width: '100%',
-    textAlign: 'center',
-  },
-  heading: {
-    marginTop: 0,
-    color: '#333333',
-  },
-  text: {
-    color: '#666666',
-    marginBottom: '24px',
-    fontSize: '14px',
-  },
-  button: {
-    // Se cambia el color azul de Google (#4285F4) por el gris oscuro corporativo de GitHub
-    backgroundColor: '#24292e',
-    color: '#ffffff',
-    border: 'none',
-    padding: '12px 24px',
-    borderRadius: '4px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    width: '100%',
-    transition: 'background-color 0.2s ease',
-  }
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('refresh_token', response.data.refresh_token);
+            
+            if (onLoginSuccess) {
+                onLoginSuccess(response.data);
+            }
+        } catch (err) {
+            if (err.response && err.response.data) {
+                setError(JSON.stringify(err.response.data));
+            } else {
+                setError('Error de conexión con el servidor');
+            }
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <h2>Pokédex Login</h2>
+            <form onSubmit={handleLogin}>
+                <div className="input-group">
+                    <label>Usuario:</label>
+                    <input 
+                        type="text" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                        required 
+                    />
+                </div>
+                <div className="input-group">
+                    <label>Contraseña:</label>
+                    <input 
+                        type="password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
+                    />
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            {error && <p className="error-message">{error}</p>}
+        </div>
+    );
 };
 
 export default LoginForm;

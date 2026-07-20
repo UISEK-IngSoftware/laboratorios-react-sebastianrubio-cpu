@@ -29,11 +29,8 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // El token caducó o es inválido; se procede a limpiar el cliente
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      
-      // Forzar la recarga para que el estado de App.jsx devuelva al usuario al Login
       window.location.reload();
     }
     return Promise.reject(error);
