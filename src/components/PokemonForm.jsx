@@ -1,14 +1,17 @@
-// src/components/PokemonForm.jsx
 import { useState, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom'; 
 import { savePokemon, fetchPokemonById, updatePokemon } from '../services/pokemonService';
 import './PokemonForm.css';
+import Spinner from './spinner';
 
 export default function PokemonForm() {
     const navigate = useNavigate();
-    const { id } = useParams(); // Si existe 'id', estamos editando un registro
+    const { id } = useParams();
     const isEditMode = Boolean(id);
+    const [loading, setLoading] = useState(isEditMode);
+    const [error, setError] = useState(null);
+    const [booting, setBooting] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -18,9 +21,9 @@ export default function PokemonForm() {
     });
     const [picture, setPicture] = useState(null);
 
-    // Precarga adaptativa de datos si se detecta Modo Edición
     useEffect(() => {
         if (isEditMode) {
+            setLoading(true);
             fetchPokemonById(id)
                 .then((data) => {
                     setFormData({
@@ -30,11 +33,16 @@ export default function PokemonForm() {
                         height: data.height !== null ? data.height : ''
                     });
                 })
-                .catch((error) => {
-                    console.error("Error al recuperar el espécimen:", error);
+                .catch((err) => {
+                    setError(err);
                     alert("No se pudo obtener la información del Pokémon para editar.");
                     navigate('/');
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
+        } else {
+            setLoading(false);
         }
     }, [id, isEditMode, navigate]);
 
@@ -68,18 +76,18 @@ export default function PokemonForm() {
             return;
         }
 
-       const dataToSend = new FormData();
-            dataToSend.append('name', formData.name);
+        const dataToSend = new FormData();
+        dataToSend.append('name', formData.name);
         dataToSend.append('type', formData.type);
         dataToSend.append('weight', formData.weight);
         dataToSend.append('height', formData.height);
 
         if (picture) {
-            //Cambiar 'image' por 'picture' 
             dataToSend.append('picture', picture);
         }
 
         try {
+            setLoading(true);
             if (isEditMode) {
                 await updatePokemon(id, dataToSend);
                 alert("¡Actualización completada con éxito!");
@@ -88,11 +96,21 @@ export default function PokemonForm() {
                 alert("¡Registro completado! El espécimen se ha guardado.");
             }
             navigate('/'); 
-        } catch (error) {
-            console.error("Fallo crítico en el guardado:", error);
+        } catch (err) {
+            setError(err);
             alert("Error de red: Operación rechazada por el servidor.");
+        } finally {
+            setLoading(false);
         }
     };
+
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Spinner />
+            </Box>
+        );
+    }
 
     return (
         <Box sx={{ p: 1 }}>

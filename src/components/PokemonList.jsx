@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import { Button } from '@mui/material';
 import { getPokemons, deletePokemon } from '../services/pokemonService';
 import PokemonCard from './PokemonCard';
+import Spinner from './spinner';
 import './PokemonList.css';
-import './spinner';
 
 export default function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [booting, setBooting] = useState(false);
   const [systemOn, setSystemOn] = useState(false);
 
   useEffect(() => {
     if (systemOn) {
-      
       fetchData();
     }
   }, [systemOn]);
@@ -31,10 +29,6 @@ export default function PokemonList() {
       setLoading(false);
     }
   };
-
-  if (loading){
-    return <spinner />
-  }
 
   const handlePowerOn = () => {
     setBooting(true);
@@ -65,7 +59,7 @@ export default function PokemonList() {
         {booting && (
           <div className="terminal-loader-content">
             <span className="neon-text-green">INICIALIZANDO SISTEMA...</span>
-            <div className="progress-bar-simulation"></div>
+            <Spinner />
             <div className="crt-scanline"></div>
           </div>
         )}
@@ -74,7 +68,7 @@ export default function PokemonList() {
           <div className="pokemon-grid-layout elastic-cards-entrance">
             {loading ? (
               <div className="terminal-loader-content">
-                <CircularProgress sx={{ color: '#00ff41' }} />
+                
                 <span className="neon-subtext">CARGANDO REGISTROS...</span>
               </div>
             ) : (

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/material';
+import Spinner from './spinner';
 
 const LoginForm = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
-
+        setLoading(true);
         try {
             const params = new URLSearchParams();
             params.append('grant_type', 'password');
@@ -31,8 +34,17 @@ const LoginForm = ({ onLoginSuccess }) => {
             }
         } catch (err) {
             setError(err.response ? ' Acceso denegado: Credenciales no válidas' : ' Fallo de conexión de red');
+            setLoading(false);
         }
     };
+
+    if (loading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Spinner />
+            </Box>
+        );
+    }
 
     return (
         <div className="tech-login-wrapper">
