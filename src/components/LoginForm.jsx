@@ -66,7 +66,7 @@ const LoginForm = ({ onLoginSuccess }) => {
                     {error && <div className="tech-error-box">{error}</div>}
                     
                     <button type="submit" className="tech-submit-btn">
-                         DECOMANCIAR ACCESO
+                         ENTRAR
                     </button>
                 </form>
             </div>

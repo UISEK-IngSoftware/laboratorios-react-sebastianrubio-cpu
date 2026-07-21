@@ -3,15 +3,19 @@ import { Button, CircularProgress } from '@mui/material';
 import { getPokemons, deletePokemon } from '../services/pokemonService';
 import PokemonCard from './PokemonCard';
 import './PokemonList.css';
+import './spinner';
 
 export default function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [booting, setBooting] = useState(false);
   const [systemOn, setSystemOn] = useState(false);
 
   useEffect(() => {
     if (systemOn) {
+      
       fetchData();
     }
   }, [systemOn]);
@@ -22,11 +26,15 @@ export default function PokemonList() {
       const data = await getPokemons();
       setPokemons(data);
     } catch (error) {
-      console.error(error);
+      setError(error);
     } finally {
       setLoading(false);
     }
   };
+
+  if (loading){
+    return <spinner />
+  }
 
   const handlePowerOn = () => {
     setBooting(true);
