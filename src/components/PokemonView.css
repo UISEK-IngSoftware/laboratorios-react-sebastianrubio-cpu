@@ -1,0 +1,91 @@
+.tiktok-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.pokedex-tiktok-card {
+    width: 380px;
+    height: 650px;
+    background: #dc0a2d;
+    border: 6px solid #222;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    color: #fff;
+    position: relative;
+}
+
+.pokedex-screen-top {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    background: #333;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #555;
+}
+
+.pokedex-image-container {
+    flex: 1;
+    background: #f0f0f0;
+    border: 4px solid #333;
+    border-radius: 12px;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.poke-tiktok-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.pokedex-info-panel {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #444;
+    text-align: center;
+}
+
+.pokedex-info-panel h2 {
+    margin: 0 0 10px 0;
+    color: #ffcb05;
+    text-transform: uppercase;
+}
+
+.poke-stats-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    color: #00ffcc;
+}
+
+.tiktok-scroll-indicator {
+    text-align: center;
+    font-size: 0.75rem;
+    margin-top: 10px;
+    color: #aaa;
+}
+
+.tiktok-loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212;
+    color: #00ffcc;
+    font-family: monospace;
+    font-size: 1.2rem;
+}
