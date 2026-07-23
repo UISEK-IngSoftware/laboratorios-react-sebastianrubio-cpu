@@ -46,6 +46,16 @@ main {
     box-sizing: border-box;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.scanner-line-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4dadf7, transparent);
 }
 
 .tech-card-header {
@@ -67,6 +77,11 @@ main {
     color: #909296;
     margin: 0;
     letter-spacing: 1px;
+}
+
+.tech-form {
+    display: flex;
+    flex-direction: column;
 }
 
 .tech-input-field {
@@ -117,10 +132,33 @@ main {
     cursor: pointer;
     transition: background-color 0.2s;
     letter-spacing: 1px;
+    margin-top: 5px;
 }
 
 .tech-submit-btn:hover {
     background-color: #1971c2;
+}
+
+.tech-secondary-btn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: transparent;
+    color: #909296;
+    border: 1px solid #373a40;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'monospace';
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.tech-secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e3e6ed;
+    border-color: #4dadf7;
 }
 
 .pokemon-grid-layout {
@@ -132,4 +170,14 @@ main {
     max-width: 1300px;
     margin: 0 auto;
     box-sizing: border-box;
+}
+
+.pokemon-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
 }

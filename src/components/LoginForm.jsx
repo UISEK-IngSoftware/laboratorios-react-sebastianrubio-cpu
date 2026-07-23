@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const LoginForm = ({ onLoginSuccess }) => {
+const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -13,7 +13,7 @@ const LoginForm = ({ onLoginSuccess }) => {
         try {
             const params = new URLSearchParams();
             params.append('grant_type', 'password');
-            params.append('client_id', '21i5cCFdLVhBdLCQ6F7ZoJXttCQY3fQb6QsKA8f4');
+            params.append('client_id', 'z3XZ46t4D2WlJWJAkhYGrXHePWg8ss5VR7r7riMV');
             params.append('username', username);
             params.append('password', password);
 
@@ -30,15 +30,15 @@ const LoginForm = ({ onLoginSuccess }) => {
                 onLoginSuccess(response.data);
             }
         } catch (err) {
-            setError(err.response ? ' Acceso denegado: Credenciales no válidas' : ' Fallo de conexión de red');
+            setError(err.response ? ' ACCESO DENEGADO: CREDENCIALES NO VÁLIDAS' : ' FALLO DE CONEXIÓN DE RED');
         }
     };
 
     return (
         <div className="tech-login-wrapper">
             <div className="tech-login-card">
+                <div className="scanner-line-effect"></div>
                 <div className="tech-card-header">
-                    <div className="scanner-line-effect"></div>
                     <h2>SYSTEM ACCESS</h2>
                     <p>AUTENTICACIÓN REQUERIDA (OAUTH 2.0)</p>
                 </div>
@@ -66,8 +66,18 @@ const LoginForm = ({ onLoginSuccess }) => {
                     {error && <div className="tech-error-box">{error}</div>}
                     
                     <button type="submit" className="tech-submit-btn">
-                         ENTRAR
+                        ENTRAR
                     </button>
+                    
+                    {onNavigateRegister && (
+                        <button 
+                            type="button" 
+                            className="tech-secondary-btn" 
+                            onClick={onNavigateRegister}
+                        >
+                            REGISTRO
+                        </button>
+                    )}
                 </form>
             </div>
         </div>
