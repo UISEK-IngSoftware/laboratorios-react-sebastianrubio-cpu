@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import { Button } from '@mui/material';
 import { getPokemons, deletePokemon } from '../services/pokemonService';
 import PokemonCard from './PokemonCard';
 import './PokemonList.css';
@@ -50,14 +50,14 @@ export default function PokemonList() {
       <div className={`pokedex-large-standby ${booting ? 'system-booting' : ''} ${systemOn ? 'screen-active' : ''}`}>
         {!systemOn && !booting && (
           <Button onClick={handlePowerOn} className="pokedex-trigger-btn">
-            Enceder Pokedex
+            Encender Pokedex
           </Button>
         )}
 
         {booting && (
-          <div className="terminal-loader-content">
-            <span className="neon-text-green">INICIALIZANDO SISTEMA...</span>
-            <div className="progress-bar-simulation"></div>
+          <div className="terminal-loader-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+            <span className="neon-text-green" style={{ marginBottom: '15px' }}>INICIALIZANDO SISTEMA...</span>
+            <span className="tech-spinner-lg"></span>
             <div className="crt-scanline"></div>
           </div>
         )}
@@ -65,9 +65,9 @@ export default function PokemonList() {
         {systemOn && (
           <div className="pokemon-grid-layout elastic-cards-entrance">
             {loading ? (
-              <div className="terminal-loader-content">
-                <CircularProgress sx={{ color: '#00ff41' }} />
-                <span className="neon-subtext">CARGANDO REGISTROS...</span>
+              <div className="terminal-loader-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', minHeight: '300px' }}>
+                <span className="tech-spinner-lg"></span>
+                <span className="neon-subtext" style={{ marginTop: '15px', color: '#4dadf7', fontFamily: 'monospace', letterSpacing: '1px' }}>CARGANDO REGISTROS...</span>
               </div>
             ) : (
               pokemons.map((pokemon) => (

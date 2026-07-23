@@ -8,17 +8,19 @@ const RegisterForm = ({ onNavigateLogin }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
 
-        // Validación de coincidencia de contraseñas
         if (password !== confirmPassword) {
             setError('LAS CONTRASEÑAS NO COINCIDEN.');
             return;
         }
+
+        setIsLoading(true);
 
         try {
             await axios.post('http://localhost:8000/api/register/', {
@@ -34,6 +36,7 @@ const RegisterForm = ({ onNavigateLogin }) => {
             }, 1200);
         } catch (err) {
             setError('ERROR EN EL REGISTRO. VERIFIQUE LOS DATOS.');
+            setIsLoading(false);
         }
     };
 
@@ -54,6 +57,7 @@ const RegisterForm = ({ onNavigateLogin }) => {
                             value={username} 
                             onChange={(e) => setUsername(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     <div className="tech-input-field">
@@ -63,15 +67,17 @@ const RegisterForm = ({ onNavigateLogin }) => {
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     <div className="tech-input-field">
                         <input 
                             type="password" 
-                            placeholder="CLAVE NUEVA"
+                            placeholder="CLAVE DE ENTRADA"
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     <div className="tech-input-field">
@@ -81,14 +87,16 @@ const RegisterForm = ({ onNavigateLogin }) => {
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     
                     {error && <div className="tech-error-box">{error}</div>}
                     {success && <div style={{ color: '#40c057', fontSize: '13px', textAlign: 'left', marginBottom: '18px', fontFamily: 'monospace' }}>{success}</div>}
                     
-                    <button type="submit" className="tech-submit-btn">
-                        REGISTRAR
+                    <button type="submit" className="tech-submit-btn" disabled={isLoading}>
+                        {isLoading && <span className="tech-spinner"></span>}
+                        {isLoading ? 'REGISTRANDO...' : 'REGISTRAR'}
                     </button>
                     
                     {onNavigateLogin && (
@@ -96,6 +104,7 @@ const RegisterForm = ({ onNavigateLogin }) => {
                             type="button" 
                             className="tech-secondary-btn" 
                             onClick={onNavigateLogin}
+                            disabled={isLoading}
                         >
                             VOLVER AL LOGIN
                         </button>

@@ -5,10 +5,12 @@ const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
+        setIsLoading(true);
 
         try {
             const params = new URLSearchParams();
@@ -31,6 +33,7 @@ const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
             }
         } catch (err) {
             setError(err.response ? ' ACCESO DENEGADO: CREDENCIALES NO VÁLIDAS' : ' FALLO DE CONEXIÓN DE RED');
+            setIsLoading(false);
         }
     };
 
@@ -51,6 +54,7 @@ const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
                             value={username} 
                             onChange={(e) => setUsername(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     <div className="tech-input-field">
@@ -60,13 +64,15 @@ const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
                             required 
+                            disabled={isLoading}
                         />
                     </div>
                     
                     {error && <div className="tech-error-box">{error}</div>}
                     
-                    <button type="submit" className="tech-submit-btn">
-                        ENTRAR
+                    <button type="submit" className="tech-submit-btn" disabled={isLoading}>
+                        {isLoading && <span className="tech-spinner"></span>}
+                        {isLoading ? 'AUTENTICANDO...' : 'ENTRAR'}
                     </button>
                     
                     {onNavigateRegister && (
@@ -74,6 +80,7 @@ const LoginForm = ({ onLoginSuccess, onNavigateRegister }) => {
                             type="button" 
                             className="tech-secondary-btn" 
                             onClick={onNavigateRegister}
+                            disabled={isLoading}
                         >
                             REGISTRO
                         </button>
